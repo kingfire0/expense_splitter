@@ -1,0 +1,295 @@
+/* =========================
+   Vibrant & Engaging Theme
+========================= */
+
+/* Base theme variables */
+:root {
+  --bg: #E0FFFF; /* Soft Blue background */
+  --text: #111827;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --positive: #059669; /* green */
+  --negative: #dc2626; /* red */
+  --primary: #4169E1; /* Royal Blue */
+  --accent: #FFA500; /* Bright Orange */
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  --radius: 12px;
+}
+
+
+
+/* =========================
+   Global Styles
+========================= */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+/* =========================
+   Header
+========================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  /* border-radius: var(--radius) var(--radius) 0 0; */
+  place-items: center;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--primary);
+}
+
+/* =========================
+   Buttons
+========================= */
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+
+.btn{
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 20px;
+  margin-left: 10px;
+}
+.btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+} 
+
+/* Primary: Gradient Blue */
+.btn-ghost {
+  background: red;
+  color: whitesmoke;
+  padding: 10px 20px;
+  border: 2px solid var(--border);
+  margin-left: 10px;
+ 
+}
+.btn-ghost:hover {
+  background: rgba(65,105,225,0.1);
+  box-shadow: 0 6px 12px rgba(0,0,0);
+  transform: translateY(-2px) scale(1.05);
+}
+.btn-primary {
+  background: linear-gradient(45deg, #4169E1, #7F56D9);
+  color: #fff;
+  padding: 10px 20px;
+  margin-right: 10px;
+}
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Accent: Orange */
+.btn-accent {
+  background-color: var(--accent);
+  color: #333;
+  padding: 10px 20px;
+}
+.btn-accent:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Success & Danger */
+.btn-success { background: var(--positive); color: #fff; }
+.btn-danger { background: var(--negative); color: #fff; }
+
+/* =========================
+   Cards
+========================= */
+.card {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.5s ease forwards;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+
+/* =========================
+   Tabs
+========================= */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.tab {
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  transition: all 0.3s ease;
+}
+.tab.active {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* =========================
+   Balance Summary
+========================= */
+.balance-item {
+  padding: 10px;
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.balance-positive {
+  background: rgba(5,150,105,0.15);
+  color: var(--positive);
+}
+.balance-negative {
+  background: rgba(220,38,38,0.15);
+  color: var(--negative);
+}
+
+/* =========================
+   Expense List
+========================= */
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--card);
+  margin-bottom: 6px;
+  transition: all 0.3s ease;
+}
+.list-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+.list-item button {
+  margin-left: 10px;
+}
+
+/* =========================
+   Dashboard / Group Cards
+========================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.group-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 14px;
+}
+.group-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+.group-summary {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: var(--radius);
+  background: rgba(65,105,225,0.1);
+  color: var(--primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* =========================
+   Muted Text
+========================= */
+.muted {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* =========================
+   Inputs & Forms
+========================= */
+input, select {
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+  width: 100%;
+  font-size: 14px;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(65,105,225,0.3);
+}
+
+/* =========================
+   Animations
+========================= */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.settled {
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.suggestion-item:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+
+/* =========================
+   Responsive adjustments
+========================= */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
