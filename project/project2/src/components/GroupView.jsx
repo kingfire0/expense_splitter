@@ -125,6 +125,7 @@ export default function GroupView({ group, onUpdate, onDelete, onBack }) {
             members={group.members || []}
             balances={balances}
             suggestions={suggestions}
+             expenses={group.expenses || []}
             settlements={group.settlements || []}
             onSettle={(from, to, amount) => {
               updateGroup({

@@ -178,6 +178,55 @@ button {
   background: rgba(220,38,38,0.15);
   color: var(--negative);
 }
+/* Expense Distribution & Settlements Table */
+.table-container {
+  margin-top: 16px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--card);
+}
+
+.table-title {
+  padding: 12px 14px;
+  font-weight: 600;
+  background: var(--primary);
+  color: white;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.custom-table th {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.custom-table tr:hover {
+  background: rgba(37, 99, 235, 0.05);
+  transition: 0.2s ease;
+}
+
+[data-theme="dark"] .custom-table th {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f3f4f6;
+}
+
+[data-theme="dark"] .custom-table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
 
 /* =========================
    Expense List
