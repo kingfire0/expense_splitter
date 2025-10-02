@@ -17,7 +17,7 @@ export default function ExpenseForm({ members, onAdd }) {
     if (!description || !amount || !paidBy || participants.length === 0) return;
 
     onAdd({
-      id: `exp_${Date.now()}`,
+      id: `exp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`, // ✅ Unique ID
       description,
       amount: Number(amount),
       paidBy,

@@ -1,18 +1,19 @@
+
 // src/components/GroupView.jsx
 import React, { useState } from "react";
 import ExpenseForm from "./ExpenseForm";
 import ExpenseList from "./ExpenseList";
 import MemberManager from "./MemberManager";
 import BalanceSummary from "./BalanceSummary";
-import { format } from "date-fns";
 import { calculateBalances, optimizeSettlements } from "../utils/settlement";
+import { addExpense, removeExpense, updateExpense as updateExpenseAPI } from "../api/Localstore";
 
 export default function GroupView({ group, onUpdate, onDelete, onBack }) {
   const [tab, setTab] = useState("expenses");
 
   if (!group) return <p>Loading group...</p>;
 
-  // Calculate balances and suggested settlements
+  // Calculate balances and suggestions
   const balances = calculateBalances(
     group.members || [],
     group.expenses || [],
@@ -20,38 +21,36 @@ export default function GroupView({ group, onUpdate, onDelete, onBack }) {
   );
   const suggestions = optimizeSettlements(balances);
 
-  // Helper to update group
-  const updateGroup = (patch) => {
-    onUpdate({ ...group, ...patch, updatedAt: Date.now() });
-  };
-
-  // Expense actions
-  const addExpense = (exp) => {
+  // ----- Expense actions -----
+  const handleAddExpense = async (exp) => {
     const withDate = { ...exp, date: new Date().toISOString() }; // attach timestamp
-    updateGroup({ expenses: [withDate, ...(group.expenses || [])] });
+    const updatedGroup = await addExpense(group._id, withDate);
+    onUpdate(updatedGroup);
   };
 
-  const updateExpense = (exp) =>
-    updateGroup({
-      expenses: (group.expenses || []).map((e) => (e.id === exp.id ? exp : e)),
-    });
+  const handleDeleteExpense = async (id) => {
+    const updatedGroup = await removeExpense(group._id, id);
+    onUpdate(updatedGroup);
+  };
 
-  const deleteExpense = (id) =>
-    updateGroup({
-      expenses: (group.expenses || []).filter((e) => e.id !== id),
-    });
+  const handleUpdateExpense = async (exp) => {
+    const updatedGroup = await updateExpenseAPI(group._id, exp);
+    onUpdate(updatedGroup);
+  };
 
-  // Member actions
+  // ----- Member actions -----
   const addMember = (m) =>
-    updateGroup({ members: [...(group.members || []), m] });
+    onUpdate({ ...group, members: [...(group.members || []), m] });
 
   const removeMember = (id) =>
-    updateGroup({
+    onUpdate({
+      ...group,
       members: (group.members || []).filter((m) => m.id !== id),
     });
 
   // Rename group
-  const renameGroup = (name) => updateGroup({ groupName: name });
+  const renameGroup = (name) =>
+    onUpdate({ ...group, groupName: name, updatedAt: Date.now() });
 
   return (
     <div className="vstack gap">
@@ -105,17 +104,26 @@ export default function GroupView({ group, onUpdate, onDelete, onBack }) {
       <div className="vstack gap" style={{ animation: "fadeInUp 0.5s" }}>
         {tab === "expenses" && (
           <>
-            <ExpenseForm members={group.members || []} onAdd={addExpense} />
+            <ExpenseForm
+              members={group.members || []}
+              onAdd={handleAddExpense}
+            />
             <ExpenseList
               expenses={(group.expenses || []).map((e) => ({
                 ...e,
                 displayDate: e.date
-                  ? format(new Date(e.date), "MMM d, yyyy · h:mm a")
+                  ? new Date(e.date).toLocaleString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                      hour: "numeric",
+                      minute: "2-digit",
+                    })
                   : "—",
               }))}
               members={group.members || []}
-              onUpdate={updateExpense}
-              onDelete={deleteExpense}
+              onUpdate={handleUpdateExpense} // ✅ for editing
+              onDelete={handleDeleteExpense}
             />
           </>
         )}
@@ -125,10 +133,11 @@ export default function GroupView({ group, onUpdate, onDelete, onBack }) {
             members={group.members || []}
             balances={balances}
             suggestions={suggestions}
-             expenses={group.expenses || []}
+            expenses={group.expenses || []} // ✅ pass expenses for the table
             settlements={group.settlements || []}
             onSettle={(from, to, amount) => {
-              updateGroup({
+              onUpdate({
+                ...group,
                 settlements: [
                   ...(group.settlements || []),
                   { from, to, amount, date: new Date().toISOString() },
@@ -149,3 +158,4 @@ export default function GroupView({ group, onUpdate, onDelete, onBack }) {
     </div>
   );
 }
+
