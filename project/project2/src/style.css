@@ -294,11 +294,12 @@ button {
    Inputs & Forms
 ========================= */
 input, select {
-  padding: 12px;
+  padding: 10px;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   transition: all 0.2s ease;
-  width: 100%;
+  width: 95%;
+  
   font-size: 14px;
 }
 input:focus, select:focus {

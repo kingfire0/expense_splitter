@@ -38,7 +38,7 @@ export default function MemberManager({ members, onAdd, onRemove }) {
         </button>
       </form>
 
-      <ul className="list" style={{ marginTop: "14px" }}>
+      <ul className="list" style={{ marginTop: "10px" }}>
         {members.map((m) => (
           <li key={m.id} className="list-item">
             <div>
