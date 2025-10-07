@@ -1,5 +1,6 @@
 // src/components/BalanceSummary.jsx
 import React from "react";
+import confetti from "canvas-confetti";
 
 export default function BalanceSummary({
   balances = [],
@@ -41,7 +42,14 @@ export default function BalanceSummary({
                     {onSettle && (
                       <button
                         className="btn btn-success"
-                        onClick={() => onSettle(s.from, s.to, s.amount)}
+                        onClick={() => {
+                          onSettle(s.from, s.to, s.amount);
+                          confetti({
+                            particleCount: 100,
+                            spread: 80,
+                            origin: { y: 0.6 },
+                          });
+                        }}
                       >
                         Record Payment
                       </button>
