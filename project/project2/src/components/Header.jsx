@@ -60,6 +60,9 @@ export default function Header({ onCreateGroup }) {
           Create Group
         </button>
       </div>
+      
+
+
     </header>
   );
 }
